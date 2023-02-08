@@ -66,5 +66,12 @@ INSTALLED_APPS = [
 ]
 ```
 
+- Instalamos JWT
+
+```bash
+pip install djangorestframework-simplejwt
+```
+
+
 
 
