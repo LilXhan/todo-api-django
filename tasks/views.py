@@ -19,7 +19,8 @@ class TaskViewSet(ModelViewSet):
 """
 
 class TodoView(APIView):
-
+    
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         todos = Todo.objects.all()
         serializer = TodoSerializer(todos, many=True)
@@ -79,3 +80,20 @@ class TodoViewDetail(APIView):
             'ok': True,
             'message': 'Todo deleted'
         }, status=status.HTTP_200_OK)
+
+    def patch(self, request, pk):
+        todo = get_object_or_404(Todo, pk=pk)
+        serializer = TodoSerializer(todo, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response({
+                'ok': True,
+                'message': 'Todo updated'
+            }, status=status.HTTP_200_OK)
+
+        return Response({
+            'ok': False,
+            'message': serializer.errors
+        }, status=status.HTTP_502_BAD_GATEWAY)
