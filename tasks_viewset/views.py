@@ -1,4 +1,5 @@
 from rest_framework import filters
+from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -16,6 +17,7 @@ class TaskReadOnlyViewSet(ReadOnlyModelViewSet):
     search_fields = ('title', 'body')
 
 
+
 # GET, POST, PUT, PATCH, RETRIEVE, DELETE
 class TaskViewSet(ModelViewSet):
     queryset = Todo.objects.all()
@@ -24,4 +26,7 @@ class TaskViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ('title', 'body')
 
+    @action(detail=True, methods=['GET'], url_path="detalle", url_name='detalle')
+    def detalle(self, request, pk=None):
+        return self.retrieve(request, pk)
 

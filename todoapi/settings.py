@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'tasks_viewset.apps.TasksViewsetConfig',
     'django_seed',
-    'django_filters'
+    'django_filters',
+    'users',
+    'versionedtodo.apps.VersionedtodoConfig'
 ]
 
 MIDDLEWARE = [
@@ -123,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 
