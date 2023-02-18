@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'tasks',
     'authapp.apps.AuthappConfig',
     'corsheaders',
@@ -51,7 +52,8 @@ INSTALLED_APPS = [
     'django_seed',
     'django_filters',
     'users',
-    'versionedtodo.apps.VersionedtodoConfig'
+    'versionedtodo.apps.VersionedtodoConfig',
+    'usersjwt'
 ]
 
 MIDDLEWARE = [
@@ -165,3 +167,5 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_WHITELIST = [
     'http://localhost:8000'
 ]
+
+AUTH_USER_MODEL = 'usersjwt.JWTUser'
