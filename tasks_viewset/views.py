@@ -1,6 +1,8 @@
 from rest_framework import filters
 from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 
 from tasks.models import Todo
@@ -25,6 +27,8 @@ class TaskViewSet(ModelViewSet):
     pagination_class = SimplePagination
     filter_backends = [filters.SearchFilter]
     search_fields = ('title', 'body')
+
+    throttle_classes = [UserRateThrottle]
 
     @action(detail=True, methods=['GET'], url_path="detalle", url_name='detalle')
     def detalle(self, request, pk=None):

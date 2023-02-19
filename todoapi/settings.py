@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'django_filters',
     'users',
     'versionedtodo.apps.VersionedtodoConfig',
-    'usersjwt'
+    'usersjwt',
+    'django_twilio'
 ]
 
 MIDDLEWARE = [
@@ -154,7 +155,17 @@ REST_FRAMEWORK = {
     # 'PAGE_SIZE': 20
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
-    ]
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+ #       'rest_framework.throttling.AnonRateThrottle', # anonimos
+ #       'rest_framework.throttling.UserRateThrottle', # usuarios logueados
+        'rest_framework.throttling.ScopedRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+  #      'anon': '10/day',
+   #     'user': '5/day',
+        'generate_code': '1/min'
+    }
 }
 
 SIMPLE_JWT = {
